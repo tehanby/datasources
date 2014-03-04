@@ -1,0 +1,26 @@
+PODS:
+  - Mantle (1.3.1):
+    - Mantle/extobjc
+  - Mantle/extobjc (1.3.1)
+  - Specta (0.2.1)
+  - TestFlightSDK (3.0.0)
+  - TTAlertManager (1.0.0)
+  - Typhoon (1.8.1):
+    - Typhoon/no-arc
+  - Typhoon/no-arc (1.8.1)
+
+DEPENDENCIES:
+  - Mantle (~> 1.3.1)
+  - Specta (~> 0.2.1)
+  - TestFlightSDK (~> 3.0.0)
+  - TTAlertManager (~> 1.0.0)
+  - Typhoon (~> 1.8.0)
+
+SPEC CHECKSUMS:
+  Mantle: abc3b0c81bc66eb624cf9cebb8640e377d5a44ae
+  Specta: 2d06220591110c6d9757d8be8ecf8e63aa40dc2a
+  TestFlightSDK: 71e3e78d3a46144dbad975a4bf80a14dae6a818a
+  TTAlertManager: 8d49806eb7079cbe43a0aee0137784f989e5f604
+  Typhoon: 742edc255e7e21fe1467fd4efc151fef92325f55
+
+COCOAPODS: 0.29.0

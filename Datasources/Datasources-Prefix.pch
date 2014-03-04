@@ -1,16 +1,54 @@
-//
-//  Prefix header
-//
-//  The contents of this file are implicitly included at the beginning of every source file.
-//
-
 #import <Availability.h>
 
-#ifndef __IPHONE_5_0
-#warning "This project uses features only available in iOS SDK 5.0 and later."
+
+// Set this to the earliest SDK you are supporting in the code, see Availability.h for available version macros
+#ifndef __IPHONE_7_0
+    #warning "This project uses features only available in iOS SDK 7.0 and later."
 #endif
 
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+    // Include other Core Frameworks here so they're included in all classes
+
 #endif
+
+// From http://www.cimgf.com/2010/05/02/my-current-prefix-pch-file/ [1]
+#ifdef DEBUG
+    #define DLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+    #define ALog(...) [[NSAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithCString:__PRETTY_FUNCTION__ encoding:NSUTF8StringEncoding] file:[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lineNumber:__LINE__ description:__VA_ARGS__]
+#else
+    #ifndef NS_BLOCK_ASSERTIONS
+        #define NS_BLOCK_ASSERTIONS
+    #endif
+
+    // Adapt TFLog to DLog if TESTFLIGHT is enabled. [2]
+#ifdef TESTFLIGHT
+        #import "TestFlight.h"
+
+        // Log to TestFlight remotely
+        #define DLog(__FORMAT__, ...) TFLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+        #define ALog(...) TFLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+    #else
+        #define DLog(...) do { } while (0)
+        #define ALog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+    #endif
+#endif
+#define ZAssert(condition, ...) do { if (!(condition)) { ALog(__VA_ARGS__); }} while(0)
+
+// From http://iosdevelopertips.com/objective-c/uber-uicolor-macros.html
+#define RGB(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
+#define RGBA(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
+
+// From http://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string
+// (Note this is a hex number so it needs the "0x" prefix.
+// Usage: CSS_COLOR(0xFFFFFF)
+#define CSS_COLOR(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+// Usage: CSS_COLOR_ALPHA(0xFFFFFF,1.0)
+#define CSS_COLOR_ALPHA(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
+
+// check device orientation
+#define dDeviceOrientation [UIApplication sharedApplication].statusBarOrientation
+#define isPortrait  UIDeviceOrientationIsPortrait(dDeviceOrientation)
+#define isLandscape UIDeviceOrientationIsLandscape(dDeviceOrientation)
