@@ -25,6 +25,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Names" id="O9L-cL-ncV">
+                        <barButtonItem key="leftBarButtonItem" title="Add" id="bf7-tv-eCT">
+                            <connections>
+                                <segue destination="CM4-So-ePX" kind="push" id="5tb-C5-opj"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="kDr-7n-mOi">
                             <connections>
                                 <action selector="editTableView:" destination="vXZ-lx-hvc" id="XSM-T7-Bux"/>
@@ -32,13 +37,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="bf7-tv-eCT" id="uCX-pv-x4b"/>
                         <outlet property="editButton" destination="kDr-7n-mOi" id="gx8-Ry-gfp"/>
                         <outlet property="tableView" destination="VxM-Ex-Zfd" id="s2H-s0-ZjH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1019" y="323"/>
+            <point key="canvasLocation" x="925" y="-34"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rNH-bB-ivi">
@@ -56,7 +62,61 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WBd-I4-88N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="493" y="323"/>
+            <point key="canvasLocation" x="414" y="-34"/>
+        </scene>
+        <!--Add User View Controller-->
+        <scene sceneID="UUZ-Tw-WBk">
+            <objects>
+                <tableViewController id="CM4-So-ePX" customClass="AddUserViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="x6w-Ik-py0" customClass="AddUser">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Add User" id="QIC-zz-TzD">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="xIa-bg-ZNT">
+                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xIa-bg-ZNT" id="cfe-sr-rhr">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7r2-JK-dOn">
+                                                    <rect key="frame" x="20" y="11" width="54" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w4b-hQ-zOU">
+                                                    <rect key="frame" x="82" y="7" width="224" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="4QZ-aG-YY2">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="ink-1g-5t0">
+                            <connections>
+                                <action selector="handleSaveUser:" destination="CM4-So-ePX" id="5ov-Un-m0g"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="saveButton" destination="ink-1g-5t0" id="Ecw-6d-Tih"/>
+                        <outlet property="userName" destination="w4b-hQ-zOU" id="OTC-7D-PeV"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uJz-FG-ALI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1351" y="-34"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

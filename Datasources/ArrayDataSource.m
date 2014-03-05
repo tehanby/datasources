@@ -9,7 +9,6 @@
 #import "ArrayDataSource.h"
 
 @interface ArrayDataSource ()
-@property (strong, nonatomic) NSMutableArray *tableArray;
 @property (nonatomic, copy) NSString *cellIdentifier;
 @property (nonatomic, copy) TableViewCellConfigureBlock configureCellBlock;
 @end

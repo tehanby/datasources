@@ -23,6 +23,7 @@
 		8E3F134518C4C2970098D117 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3F132418C4C2970098D117 /* UIKit.framework */; };
 		8E3F134D18C4C2970098D117 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E3F134B18C4C2970098D117 /* InfoPlist.strings */; };
 		8E3F134F18C4C2970098D117 /* DatasourcesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3F134E18C4C2970098D117 /* DatasourcesTests.m */; };
+		8ED9001718C793A10010F6E8 /* AddUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED9001618C793A10010F6E8 /* AddUserViewController.m */; };
 		8EE65A1418C4FB8C003E1CBA /* ArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE65A1318C4FB8C003E1CBA /* ArrayDataSource.m */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,8 @@
 		8E3F134A18C4C2970098D117 /* DatasourcesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DatasourcesTests-Info.plist"; sourceTree = "<group>"; };
 		8E3F134C18C4C2970098D117 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8E3F134E18C4C2970098D117 /* DatasourcesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatasourcesTests.m; sourceTree = "<group>"; };
+		8ED9001518C793A10010F6E8 /* AddUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddUserViewController.h; sourceTree = "<group>"; };
+		8ED9001618C793A10010F6E8 /* AddUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddUserViewController.m; sourceTree = "<group>"; };
 		8EE65A1218C4FB8C003E1CBA /* ArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSource.h; sourceTree = "<group>"; };
 		8EE65A1318C4FB8C003E1CBA /* ArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayDataSource.m; sourceTree = "<group>"; };
 		9E774982249B47FFB9C6E4FB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 				8EE65A1318C4FB8C003E1CBA /* ArrayDataSource.m */,
 				8E3F133218C4C2970098D117 /* Main_iPhone.storyboard */,
 				8E3F133518C4C2970098D117 /* Main_iPad.storyboard */,
+				8ED9001518C793A10010F6E8 /* AddUserViewController.h */,
+				8ED9001618C793A10010F6E8 /* AddUserViewController.m */,
 				8E3F133818C4C2970098D117 /* ViewController.h */,
 				8E3F133918C4C2970098D117 /* ViewController.m */,
 				8E3F133B18C4C2970098D117 /* Images.xcassets */,
@@ -303,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E3F133A18C4C2970098D117 /* ViewController.m in Sources */,
+				8ED9001718C793A10010F6E8 /* AddUserViewController.m in Sources */,
 				8E3F133118C4C2970098D117 /* AppDelegate.m in Sources */,
 				8EE65A1418C4FB8C003E1CBA /* ArrayDataSource.m in Sources */,
 				8E3F132D18C4C2970098D117 /* main.m in Sources */,
