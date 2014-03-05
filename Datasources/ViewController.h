@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddUserViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <AddUserViewControllerDelegate>
 
 @end

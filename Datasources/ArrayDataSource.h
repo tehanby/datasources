@@ -12,6 +12,8 @@
 
 typedef void (^TableViewCellConfigureBlock)(id cell, id item);
 
+@property (strong, nonatomic) NSMutableArray *tableArray;
+
 - (id)initWithArray:(NSArray *)aTableArray
      cellIdentifier:(NSString *)aCellIdentifier
  configureCellBlock:(TableViewCellConfigureBlock)aConfigureCellBlock;

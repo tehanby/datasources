@@ -13,9 +13,10 @@ static NSString * const NamesCellIdentifier = @"NameCell";
 
 @interface ViewController ()
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) ArrayDataSource *namesArrayDataSource;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
 @end
 
@@ -38,12 +39,9 @@ static NSString * const NamesCellIdentifier = @"NameCell";
     [self setupTableView];
 }
 
+
 - (void)setupTableView
 {
-    TableViewCellConfigureBlock configureCell = ^(UITableViewCell *cell, NSString *name) {
-        [cell.textLabel setText:name];
-    };
-    
     NSMutableArray *namesArray = [[NSMutableArray alloc] initWithObjects:
                        @"Eric Delabar",
                        @"Justin Cockburn",
@@ -51,6 +49,16 @@ static NSString * const NamesCellIdentifier = @"NameCell";
                        @"Tim Hanby",
                        @"Developer",
                        nil];
+    
+    [self buildTableView:namesArray];
+}
+
+- (void)buildTableView:(NSMutableArray *)namesArray
+{
+    TableViewCellConfigureBlock configureCell = ^(UITableViewCell *cell, NSString *name) {
+        [cell.textLabel setText:name];
+    };
+    
     self.namesArrayDataSource = [[ArrayDataSource alloc] initWithArray:namesArray
                                                         cellIdentifier:NamesCellIdentifier
                                                     configureCellBlock:configureCell];
@@ -58,6 +66,21 @@ static NSString * const NamesCellIdentifier = @"NameCell";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NamesCellIdentifier];
 }
 
+- (void)addUserViewController:(AddUserViewController *)controller didFinishEnteringUser:(NSString *)user
+{
+    NSMutableArray *namesArray = self.namesArrayDataSource.tableArray;
+    [namesArray addObject:user];
+    NSLog(@"This was returned from AddUserViewController %@",user);
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self buildTableView:namesArray];
+}
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [super prepareForSegue:segue sender:sender];
+    
+    ((AddUserViewController *)segue.destinationViewController).delegate = self;
+}
 
 @end
