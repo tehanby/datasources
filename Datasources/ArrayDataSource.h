@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AzureSDK-iOS/WindowsAzureMobileServices.h>
 
 @interface ArrayDataSource : NSObject<UITableViewDataSource>
 
 typedef void (^TableViewCellConfigureBlock)(id cell, id item);
 
 @property (strong, nonatomic) NSMutableArray *tableArray;
+@property (nonatomic, strong) NSArray *searchResults;
+@property (strong, nonatomic) MSClient *client;
 
 - (id)initWithArray:(NSArray *)aTableArray
      cellIdentifier:(NSString *)aCellIdentifier

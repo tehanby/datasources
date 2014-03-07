@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AddUserViewController.h"
+#import <AzureSDK-iOS/WindowsAzureMobileServices.h>
 
-@interface ViewController : UIViewController <AddUserViewControllerDelegate>
+@interface ViewController : UIViewController <AddUserViewControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
+@property (strong, nonatomic) MSClient *client;
 
 @end

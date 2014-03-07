@@ -4,12 +4,32 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-Mantle.xcscheme</key>
+		<key>Pods-AFNetworking.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Specta.xcscheme</key>
+		<key>Pods-AzureSDK-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-DatasourcesTests-OCMock.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-DatasourcesTests-Specta.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-DatasourcesTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Mantle.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,32 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>40F81E67B7F646B1B3696100</key>
+		<key>032EE982883549E29D6D806C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>48102AF47F6D4D509E31E41C</key>
+		<key>0F1346C6FB3540429C1879B3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>48B33993BA2941CDA6620725</key>
+		<key>13B6930649334BE98A5B5B69</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5278A4F8FE324D079622F488</key>
+		<key>3034AFF7488241ABA08A53EA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B982E5ADB04848F18823C46F</key>
+		<key>49372011BCB744BCBFD95062</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E261EB6DD9E842BB96274D39</key>
+		<key>52D93AFCF55945DEA351F035</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8B500F72DC6547249087092F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C4E5C888C00C482390A28E4C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CFE1DDC96D724407A749DE79</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D96B133F1DED4E899FE1536E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
