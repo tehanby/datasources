@@ -36,21 +36,11 @@ static NSString * const NamesCellIdentifier = @"NameCell";
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self setupTableView];
-}
-
-
-- (void)setupTableView
-{
-    NSMutableArray *namesArray = [[NSMutableArray alloc] initWithObjects:
-                       @"Eric Delabar",
-                       @"Justin Cockburn",
-                       @"Dan Cuconati",
-                       @"Tim Hanby",
-                       @"Developer",
-                       nil];
+    self.client = [MSClient clientWithApplicationURLString:@"https://namestest.azure-mobile.net/"
+                                            applicationKey:@"rvYeJVoPJysGaaRUZitZmSNKvzJTRW26"];
     
-    [self buildTableView:namesArray];
+    [self buildNamesArray];
+    
 }
 
 - (void)buildTableView:(NSMutableArray *)namesArray
@@ -62,18 +52,40 @@ static NSString * const NamesCellIdentifier = @"NameCell";
     self.namesArrayDataSource = [[ArrayDataSource alloc] initWithArray:namesArray
                                                         cellIdentifier:NamesCellIdentifier
                                                     configureCellBlock:configureCell];
+    
     self.tableView.dataSource = self.namesArrayDataSource;
+    self.searchDisplayController.searchResultsDataSource = self.namesArrayDataSource;
+    
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NamesCellIdentifier];
 }
 
 - (void)addUserViewController:(AddUserViewController *)controller didFinishEnteringUser:(NSString *)user
 {
-    NSMutableArray *namesArray = self.namesArrayDataSource.tableArray;
-    [namesArray addObject:user];
-    NSLog(@"This was returned from AddUserViewController %@",user);
+    NSDictionary *item = @{ @"item" : user };
+    MSTable *itemTable = [self.client tableWithName:@"Item"];
+    [itemTable insert:item completion:^(NSDictionary *insertedItem, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSLog(@"Item inserted, id: %@", [insertedItem objectForKey:@"id"]);
+        }
+    }];
     [self dismissViewControllerAnimated:NO completion:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
-    [self buildTableView:namesArray];
+    [self buildNamesArray];
+}
+
+- (void)buildNamesArray
+{
+    NSMutableArray *namesArray = [[NSMutableArray alloc] init];
+    MSTable *itemTable = [self.client tableWithName:@"Item"];
+    [itemTable readWithCompletion:^(NSArray *items, NSInteger totalCount, NSError *error) {
+        for (id item in items){
+            [namesArray addObject:[item objectForKey:@"item"]];
+        }
+        [self buildTableView:namesArray];
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -81,6 +93,22 @@ static NSString * const NamesCellIdentifier = @"NameCell";
     [super prepareForSegue:segue sender:sender];
     
     ((AddUserViewController *)segue.destinationViewController).delegate = self;
+}
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"self contains[c] %@", searchText];
+    self.namesArrayDataSource.searchResults = [self.namesArrayDataSource.tableArray filteredArrayUsingPredicate:resultPredicate];
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
 }
 
 @end

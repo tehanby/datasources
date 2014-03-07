@@ -8,6 +8,7 @@
 
 #import "ArrayDataSource.h"
 
+
 @interface ArrayDataSource ()
 @property (nonatomic, copy) NSString *cellIdentifier;
 @property (nonatomic, copy) TableViewCellConfigureBlock configureCellBlock;
@@ -24,21 +25,34 @@
         self.tableArray = aTableArray;
         self.cellIdentifier = aCellIdentifier;
         self.configureCellBlock = [aConfigureCellBlock copy];
+        self.client = [MSClient clientWithApplicationURLString:@"https://namestest.azure-mobile.net/"
+                                                applicationKey:@"rvYeJVoPJysGaaRUZitZmSNKvzJTRW26"];
     }
     return self;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if(self.searchResults){
+        return [self.searchResults count];
+    }
     return [self.tableArray count];
 }
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier
-                                                            forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier];
+    
+    if(cell == nil){
+        cell = [[UITableViewCell alloc] init];
+    }
 
-    NSString *name = [self.tableArray objectAtIndex:indexPath.row];
+    NSString *name = nil;
+    if(self.searchResults){
+        name = [self.searchResults objectAtIndex:indexPath.row];
+    }else{
+        name = [self.tableArray objectAtIndex:indexPath.row];
+    }
     
     [cell.textLabel setText:name];
     return cell;
@@ -46,11 +60,17 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //remove the deleted object from your data source.
-        //If your data source is an NSMutableArray, do this
-        [self.tableArray removeObjectAtIndex:indexPath.row];
-        NSArray * indexPaths = [NSArray arrayWithObject:indexPath];
-        [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"item == '%@'", [self.tableArray objectAtIndex:indexPath.row]]];
+        MSTable *itemTable = [self.client tableWithName:@"Item"];
+        [itemTable readWithPredicate:predicate completion:^(NSArray *items, NSInteger totalCount, NSError *error) {
+            for(id item in items){
+                [itemTable delete:item completion:^(id itemId, NSError *error) {
+                    [self.tableArray removeObjectAtIndex:indexPath.row];
+                    NSArray * indexPaths = [NSArray arrayWithObject:indexPath];
+                    [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+                }];
+            }
+        }];
     }
 }
 

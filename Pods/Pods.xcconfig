@@ -1,7 +1,6 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$(SDKROOT)/Developer/Library/Frameworks" "$(DEVELOPER_LIBRARY_DIR)/Frameworks"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/Mantle" "${PODS_ROOT}/Headers/Specta" "${PODS_ROOT}/Headers/TTAlertManager" "${PODS_ROOT}/Headers/TestFlightSDK" "${PODS_ROOT}/Headers/Typhoon" $(SDKROOT)/usr/include/libxml2
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/AzureSDK-iOS" "${PODS_ROOT}/Headers/Mantle" "${PODS_ROOT}/Headers/OCMock" "${PODS_ROOT}/Headers/Specta" "${PODS_ROOT}/Headers/TTAlertManager" "${PODS_ROOT}/Headers/TestFlightSDK" "${PODS_ROOT}/Headers/Typhoon" $(SDKROOT)/usr/include/libxml2
 LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/TestFlightSDK"
-OTHER_CFLAGS = $(inherited) "-isystem${PODS_ROOT}/Headers" "-isystem${PODS_ROOT}/Headers/Mantle" "-isystem${PODS_ROOT}/Headers/Specta" "-isystem${PODS_ROOT}/Headers/TTAlertManager" "-isystem${PODS_ROOT}/Headers/TestFlightSDK" "-isystem${PODS_ROOT}/Headers/Typhoon"
-OTHER_LDFLAGS = -ObjC -lTestFlight -lxml2 -lz -framework Foundation -framework UIKit -framework XCTest
+OTHER_CFLAGS = $(inherited) "-isystem${PODS_ROOT}/Headers" "-isystem${PODS_ROOT}/Headers/AFNetworking" "-isystem${PODS_ROOT}/Headers/AzureSDK-iOS" "-isystem${PODS_ROOT}/Headers/Mantle" "-isystem${PODS_ROOT}/Headers/OCMock" "-isystem${PODS_ROOT}/Headers/Specta" "-isystem${PODS_ROOT}/Headers/TTAlertManager" "-isystem${PODS_ROOT}/Headers/TestFlightSDK" "-isystem${PODS_ROOT}/Headers/Typhoon"
+OTHER_LDFLAGS = -ObjC -lTestFlight -lxml2 -lz -framework CoreGraphics -framework Foundation -framework MobileCoreServices -framework Security -framework SystemConfiguration -framework UIKit
 PODS_ROOT = ${SRCROOT}/Pods
